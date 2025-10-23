@@ -1,6 +1,7 @@
 package racingcar;
 
 import racingcar.domain.Cars;
+import racingcar.domain.Race;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -13,5 +14,6 @@ public class Racing {
         String carNames = inputView.readInput();
         Cars cars = Cars.of(carNames);
         outputView.printRaceCountRequestMessage();
+        Race race = Race.of(inputView.readInput());
     }
 }
