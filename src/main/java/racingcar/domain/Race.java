@@ -22,4 +22,8 @@ public class Race {
             throw new IllegalArgumentException("시도할 횟수는 양수만 가능합니다.");
         }
     }
+
+    public boolean isRaceOngoing(int currentRound) {
+        return currentRound <= raceCount;
+    }
 }

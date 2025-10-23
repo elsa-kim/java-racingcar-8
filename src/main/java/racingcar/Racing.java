@@ -16,8 +16,11 @@ public class Racing {
         outputView.printRaceCountRequestMessage();
         Race race = Race.of(inputView.readInput());
         outputView.printRoundStartMessage();
-        cars.move();
-        outputView.printRound(cars.getCarsStatus());
-
+        int currentRound = 1;
+        while (race.isRaceOngoing(currentRound)) {
+            cars.move();
+            outputView.printRound(cars.getCarsStatus());
+            currentRound++;
+        }
     }
 }
