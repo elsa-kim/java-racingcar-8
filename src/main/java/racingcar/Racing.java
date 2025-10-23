@@ -12,5 +12,6 @@ public class Racing {
         outputView.printCarNameRequestMessage();
         String carNames = inputView.readInput();
         Cars cars = Cars.of(carNames);
+        outputView.printRaceCountRequestMessage();
     }
 }
