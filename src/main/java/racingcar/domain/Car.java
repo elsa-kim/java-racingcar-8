@@ -16,8 +16,8 @@ public class Car {
         return new Car(name);
     }
 
-    public CarName getName() {
-        return name;
+    public String getName() {
+        return name.getName();
     }
 
     public void move() {

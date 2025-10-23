@@ -1,5 +1,6 @@
 package racingcar;
 
+import java.util.List;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
 import racingcar.view.InputView;
@@ -22,6 +23,7 @@ public class Racing {
             outputView.printRound(cars.getCarsStatus());
             currentRound++;
         }
-        String winner = cars.findWinner();
+        List<String> winner = cars.findWinner();
+        outputView.printWinner(winner);
     }
 }
