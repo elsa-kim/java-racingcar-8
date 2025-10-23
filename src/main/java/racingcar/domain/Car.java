@@ -29,4 +29,12 @@ public class Car {
     public Map<String, Integer> getStatus() {
         return Map.of(name.getName(), position);
     }
+
+    public int maxPosition(int maxPosition) {
+        return Math.max(position, maxPosition);
+    }
+
+    public boolean isWinner(int winnerPosition) {
+        return position == winnerPosition;
+    }
 }

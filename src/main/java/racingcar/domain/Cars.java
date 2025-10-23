@@ -31,4 +31,17 @@ public class Cars {
     public List<Map<String, Integer>> getCarsStatus() {
         return cars.stream().map(Car::getStatus).toList();
     }
+
+    public String findWinner() {
+        int maxPosition = 0;
+        for (Car car : cars) {
+            maxPosition = car.maxPosition(maxPosition);
+        }
+
+        int winnerPosition = maxPosition;
+        List<String> winners = cars.stream().filter(car -> car.isWinner(winnerPosition))
+                .map(car -> car.getName().getName()).toList();
+
+        return String.join(", ", winners);
+    }
 }

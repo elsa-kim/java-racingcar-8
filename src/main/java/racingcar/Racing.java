@@ -22,5 +22,6 @@ public class Racing {
             outputView.printRound(cars.getCarsStatus());
             currentRound++;
         }
+        String winner = cars.findWinner();
     }
 }
