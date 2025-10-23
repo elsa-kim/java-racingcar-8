@@ -16,6 +16,10 @@ public class Cars {
         return new Cars(cars);
     }
 
+    public void move(){
+        cars.forEach(Car::move);
+    }
+
     private void validateUniqueCarNames(List<Car> cars) {
         if (cars.stream().map(Car::getName).distinct().count() != cars.size()) {
             throw new IllegalArgumentException("자동차 이름은 중복일 수 없습니다.");

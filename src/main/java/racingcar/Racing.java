@@ -15,5 +15,6 @@ public class Racing {
         Cars cars = Cars.of(carNames);
         outputView.printRaceCountRequestMessage();
         Race race = Race.of(inputView.readInput());
+        cars.move();
     }
 }
