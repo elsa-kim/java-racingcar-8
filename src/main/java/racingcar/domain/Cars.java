@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Cars {
     private final List<Car> cars;
@@ -16,7 +17,7 @@ public class Cars {
         return new Cars(cars);
     }
 
-    public void move(){
+    public void move() {
         cars.forEach(Car::move);
     }
 
@@ -27,4 +28,7 @@ public class Cars {
     }
 
 
+    public List<Map<String, Integer>> getCarsStatus() {
+        return cars.stream().map(Car::getStatus).toList();
+    }
 }

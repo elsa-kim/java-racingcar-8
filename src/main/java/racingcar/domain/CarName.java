@@ -14,6 +14,10 @@ public class CarName {
         return new CarName(name);
     }
 
+    public String getName() {
+        return name;
+    }
+
     private void validateNameLength(String name) {
         if(name.isBlank() || name.length() > 5){
             throw new IllegalArgumentException("자동차 이름은 1 이상 5 이하로 입력해주세요.");

@@ -1,6 +1,7 @@
 package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.Map;
 
 public class Car {
     private final CarName name;
@@ -23,5 +24,9 @@ public class Car {
         if (Randoms.pickNumberInRange(0, 9) >= 4) {
             position++;
         }
+    }
+
+    public Map<String, Integer> getStatus() {
+        return Map.of(name.getName(), position);
     }
 }

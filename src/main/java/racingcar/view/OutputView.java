@@ -1,5 +1,8 @@
 package racingcar.view;
 
+import java.util.List;
+import java.util.Map;
+
 public class OutputView {
 
     public void printCarNameRequestMessage() {
@@ -8,5 +11,19 @@ public class OutputView {
 
     public void printRaceCountRequestMessage() {
         System.out.println("시도할 횟수는 몇 회인가요?");
+    }
+
+    public void printRoundStartMessage() {
+        System.out.println();
+        System.out.println("실행 결과");
+    }
+
+    public void printRound(List<Map<String, Integer>> carsStatus) {
+        carsStatus.stream()
+                .flatMap(map -> map.entrySet().stream())
+                .forEach(entry -> System.out.println(
+                        entry.getKey() + " : " + "-".repeat(entry.getValue())
+                ));
+        System.out.println();
     }
 }
