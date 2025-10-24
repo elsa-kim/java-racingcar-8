@@ -11,11 +11,18 @@ public class Racing {
     private final InputView inputView = new InputView();
 
     public void run() {
-        outputView.printCarNameRequestMessage();
-        String carNames = inputView.readInput();
-        Cars cars = Cars.of(carNames);
-        outputView.printRaceCountRequestMessage();
-        Race race = Race.of(inputView.readInput());
+        Cars cars = settingCars();
+        Race race = settingRace();
+        playRace(race, cars);
+        determineWinners(cars);
+    }
+
+    private void determineWinners(Cars cars) {
+        List<String> winner = cars.findWinner();
+        outputView.printWinner(winner);
+    }
+
+    private void playRace(Race race, Cars cars) {
         outputView.printRoundStartMessage();
         int currentRound = 1;
         while (race.isRaceOngoing(currentRound)) {
@@ -23,7 +30,15 @@ public class Racing {
             outputView.printRound(cars.getCarsStatus());
             currentRound++;
         }
-        List<String> winner = cars.findWinner();
-        outputView.printWinner(winner);
+    }
+
+    private Race settingRace() {
+        outputView.printRaceCountRequestMessage();
+        return Race.of(inputView.readInput());
+    }
+
+    private Cars settingCars() {
+        outputView.printCarNameRequestMessage();
+        return Cars.of(inputView.readInput());
     }
 }
