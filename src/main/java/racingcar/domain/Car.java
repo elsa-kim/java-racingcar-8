@@ -5,15 +5,17 @@ import java.util.Map;
 
 public class Car {
     private final CarName name;
-    private int position = 0;
+    private final CarPosition position;
 
-    private Car(CarName name) {
+    private Car(CarName name, CarPosition position) {
         this.name = name;
+        this.position = position;
     }
 
     public static Car of(String input) {
         CarName name = CarName.of(input);
-        return new Car(name);
+        CarPosition position = CarPosition.generate();
+        return new Car(name, position);
     }
 
     public String getName() {
@@ -22,19 +24,19 @@ public class Car {
 
     public void move() {
         if (Randoms.pickNumberInRange(0, 9) >= 4) {
-            position++;
+            position.go();
         }
     }
 
     public Map<String, Integer> getStatus() {
-        return Map.of(name.getName(), position);
+        return Map.of(name.getName(), position.getPosition());
     }
 
     public int maxPosition(int maxPosition) {
-        return Math.max(position, maxPosition);
+        return Math.max(position.getPosition(), maxPosition);
     }
 
     public boolean isWinner(int winnerPosition) {
-        return position == winnerPosition;
+        return position.getPosition() == winnerPosition;
     }
 }
