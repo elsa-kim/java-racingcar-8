@@ -21,12 +21,6 @@ public class Cars {
         cars.forEach(Car::move);
     }
 
-    private void validateUniqueCarNames(List<Car> cars) {
-        if (cars.stream().map(Car::getName).distinct().count() != cars.size()) {
-            throw new IllegalArgumentException("자동차 이름은 중복일 수 없습니다.");
-        }
-    }
-
     public List<Map<String, Integer>> getCarsStatus() {
         return cars.stream().map(Car::getStatus).toList();
     }
@@ -43,5 +37,11 @@ public class Cars {
                 .map(Car::getName)
                 .toList();
 
+    }
+
+    private void validateUniqueCarNames(List<Car> cars) {
+        if (cars.stream().map(Car::getName).distinct().count() != cars.size()) {
+            throw new IllegalArgumentException("자동차 이름은 중복일 수 없습니다.");
+        }
     }
 }
