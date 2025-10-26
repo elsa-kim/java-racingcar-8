@@ -1,32 +1,22 @@
 package racingcar.domain;
 
 public class Race {
-    private static final String INVALID_NUMBER_INPUT_MESSAGE = "숫자만 입력 가능합니다.";
-    private static final String INVALID_RACE_COUNT_MESSAGE = "시도할 횟수는 양수만 가능합니다.";
+    private final RaceCount raceCount;
+    private CurrentCount currentCount;
 
-    private final int raceCount;
-
-    private Race(int raceCount) {
-        validateCount(raceCount);
+    private Race(RaceCount raceCount, CurrentCount currentCount) {
         this.raceCount = raceCount;
+        this.currentCount = currentCount;
     }
 
     public static Race of(String input) {
-        try {
-            int raceCount = Integer.parseInt(input);
-            return new Race(raceCount);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_NUMBER_INPUT_MESSAGE, e);
-        }
+        return new Race(RaceCount.of(input), CurrentCount.generate());
     }
 
-    public boolean isRaceOngoing(int currentRound) {
-        return currentRound <= raceCount;
+    public boolean isRaceOngoing() {
+        this.currentCount = CurrentCount.nextRound(currentCount);
+
+        return currentCount.getCount() <= raceCount.getCount();
     }
 
-    private void validateCount(int raceCount) {
-        if (raceCount <= 0) {
-            throw new IllegalArgumentException(INVALID_RACE_COUNT_MESSAGE);
-        }
-    }
 }

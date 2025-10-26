@@ -24,11 +24,9 @@ public class Racing {
 
     private void playRace(Race race, Cars cars) {
         outputView.printRoundStartMessage();
-        int currentRound = 1;
-        while (race.isRaceOngoing(currentRound)) {
+        while (race.isRaceOngoing()) {
             cars.move();
             outputView.printRound(cars.getCarsStatus());
-            currentRound++;
         }
     }
 
