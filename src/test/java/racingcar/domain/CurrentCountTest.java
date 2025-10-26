@@ -21,7 +21,7 @@ class CurrentCountTest {
         CurrentCount currentCount = CurrentCount.generate();
 
         // when
-        CurrentCount nextCount = CurrentCount.nextRound(currentCount);
+        CurrentCount nextCount = currentCount.nextRound();
 
         // then
         assertAll(

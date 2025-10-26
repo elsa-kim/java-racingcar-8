@@ -14,7 +14,7 @@ public class Race {
     }
 
     public boolean isRaceOngoing() {
-        this.currentCount = CurrentCount.nextRound(currentCount);
+        this.currentCount = currentCount.nextRound();
 
         return currentCount.getCount() <= raceCount.getCount();
     }

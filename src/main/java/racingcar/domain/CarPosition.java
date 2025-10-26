@@ -14,8 +14,8 @@ public class CarPosition {
         return new CarPosition(0);
     }
 
-    public static CarPosition nextPosition(CarPosition position) {
-        return new CarPosition(position.getPosition() + 1);
+    public CarPosition nextPosition() {
+        return new CarPosition(position + 1);
     }
 
     public int getPosition() {

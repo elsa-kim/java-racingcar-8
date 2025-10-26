@@ -27,7 +27,7 @@ public class Car {
 
     public void moveCar() {
         if (Randoms.pickNumberInRange(0, 9) >= MOVE_THRESHOLD) {
-            position = CarPosition.nextPosition(position);
+            position = position.nextPosition();
         }
     }
 

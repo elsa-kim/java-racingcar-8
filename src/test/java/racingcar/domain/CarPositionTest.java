@@ -21,7 +21,7 @@ class CarPositionTest {
         CarPosition position = CarPosition.generate();
 
         // when
-        CarPosition nextPosition = CarPosition.nextPosition(position);
+        CarPosition nextPosition = position.nextPosition();
 
         // then
         assertAll(

@@ -12,8 +12,8 @@ public class CurrentCount {
         return new CurrentCount(0);
     }
 
-    public static CurrentCount nextRound(CurrentCount currentCount) {
-        return new CurrentCount(currentCount.getCount() + 1);
+    public CurrentCount nextRound() {
+        return new CurrentCount(currentCount + 1);
     }
 
     public int getCount() {
