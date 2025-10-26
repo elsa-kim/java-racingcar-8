@@ -3,6 +3,7 @@ package racingcar;
 import java.util.List;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
+import racingcar.domain.RaceCount;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -32,7 +33,8 @@ public class Racing {
 
     private Race settingRace() {
         outputView.printRaceCountRequestMessage();
-        return Race.of(inputView.readInput());
+        RaceCount raceCount = RaceCount.of(inputView.readInput());
+        return Race.of(raceCount);
     }
 
     private Cars settingCars() {

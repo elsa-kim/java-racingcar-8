@@ -9,8 +9,8 @@ public class Race {
         this.currentCount = currentCount;
     }
 
-    public static Race of(String input) {
-        return new Race(RaceCount.of(input), CurrentCount.generate());
+    public static Race of(RaceCount raceCount) {
+        return new Race(raceCount, CurrentCount.generate());
     }
 
     public boolean isRaceOngoing() {
