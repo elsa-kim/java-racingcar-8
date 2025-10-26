@@ -15,7 +15,10 @@ public class Cars {
     }
 
     public static Cars of(String input) {
-        List<Car> cars = Arrays.stream(input.split(",", -1)).map(Car::of).toList();
+        List<Car> cars = Arrays.stream(input.split(",", -1))
+                .map(Car::of)
+                .toList();
+
         return new Cars(cars);
     }
 
@@ -41,8 +44,15 @@ public class Cars {
     }
 
     private void validateUniqueCarNames(List<Car> cars) {
-        if (cars.stream().map(Car::getName).distinct().count() != cars.size()) {
+        if (isDuplicated(cars)) {
             throw new IllegalArgumentException(DUPLICATE_CAR_NAME_MESSAGE);
         }
+    }
+
+    private boolean isDuplicated(List<Car> cars) {
+        return cars.size() != cars.stream()
+                .map(Car::getName)
+                .distinct()
+                .count();
     }
 }
