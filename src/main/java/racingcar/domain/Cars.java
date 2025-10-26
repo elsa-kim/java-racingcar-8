@@ -23,7 +23,7 @@ public class Cars {
     }
 
     public void move() {
-        cars.forEach(Car::move);
+        cars.forEach(Car::moveCar);
     }
 
     public List<Map<String, Integer>> getCarsStatus() {

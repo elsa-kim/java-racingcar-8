@@ -7,7 +7,7 @@ public class Car {
     private static final int MOVE_THRESHOLD = 4;
 
     private final CarName name;
-    private final CarPosition position;
+    private CarPosition position;
 
     private Car(CarName name, CarPosition position) {
         this.name = name;
@@ -25,9 +25,9 @@ public class Car {
         return name.getName();
     }
 
-    public void move() {
+    public void moveCar() {
         if (Randoms.pickNumberInRange(0, 9) >= MOVE_THRESHOLD) {
-            position.go();
+            position = CarPosition.nextPosition(position);
         }
     }
 

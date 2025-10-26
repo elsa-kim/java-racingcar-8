@@ -1,21 +1,30 @@
 package racingcar.domain;
 
 public class CarPosition {
-    private int position;
+    private static final String INVALID_POSITION_MESSAGE = "잘못된 위치값입니다.";
 
-    private CarPosition() {
-        this.position = 0;
+    private final int position;
+
+    private CarPosition(int position) {
+        validateNonNegative(position);
+        this.position = position;
     }
 
     public static CarPosition generate() {
-        return new CarPosition();
+        return new CarPosition(0);
     }
 
-    public void go() {
-        position++;
+    public static CarPosition nextPosition(CarPosition position) {
+        return new CarPosition(position.getPosition() + 1);
     }
 
     public int getPosition() {
         return position;
+    }
+
+    private void validateNonNegative(int position) {
+        if (position < 0) {
+            throw new IllegalArgumentException(INVALID_POSITION_MESSAGE);
+        }
     }
 }
