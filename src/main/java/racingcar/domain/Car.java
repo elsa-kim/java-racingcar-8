@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Map;
 
 public class Car {
+    private static final int MOVE_THRESHOLD = 4;
+
     private final CarName name;
     private final CarPosition position;
 
@@ -15,6 +17,7 @@ public class Car {
     public static Car of(String input) {
         CarName name = CarName.of(input);
         CarPosition position = CarPosition.generate();
+
         return new Car(name, position);
     }
 
@@ -23,7 +26,7 @@ public class Car {
     }
 
     public void move() {
-        if (Randoms.pickNumberInRange(0, 9) >= 4) {
+        if (Randoms.pickNumberInRange(0, 9) >= MOVE_THRESHOLD) {
             position.go();
         }
     }

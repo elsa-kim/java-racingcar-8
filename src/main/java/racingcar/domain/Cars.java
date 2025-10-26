@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Cars {
+    private static final String DUPLICATE_CAR_NAME_MESSAGE = "자동차 이름은 중복일 수 없습니다.";
+
     private final List<Car> cars;
 
     private Cars(List<Car> cars) {
@@ -36,12 +38,11 @@ public class Cars {
                 .filter(car -> car.isWinner(winnerPosition))
                 .map(Car::getName)
                 .toList();
-
     }
 
     private void validateUniqueCarNames(List<Car> cars) {
         if (cars.stream().map(Car::getName).distinct().count() != cars.size()) {
-            throw new IllegalArgumentException("자동차 이름은 중복일 수 없습니다.");
+            throw new IllegalArgumentException(DUPLICATE_CAR_NAME_MESSAGE);
         }
     }
 }
