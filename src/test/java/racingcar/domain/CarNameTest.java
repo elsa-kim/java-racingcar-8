@@ -21,8 +21,19 @@ class CarNameTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"popopo", "", "  "})
-    void 인스턴스_생성시_공백이나_5자_초과한_input값이_들어오면_예외가_발생한다(String input) {
+    @ValueSource(strings = {"", "  "})
+    void 인스턴스_생성시_공백값이_들어오면_예외가_발생한다(String input) {
+        assertThatThrownBy(() -> CarName.of(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동차 이름은 1 이상 5 이하로 입력해주세요.");
+    }
+
+    @Test
+    void 인스턴스_생성시_5자_초과한_input값이_들어오면_예외가_발생한다() {
+        // given
+        String input = "popopo";
+
+        // when & then
         assertThatThrownBy(() -> CarName.of(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차 이름은 1 이상 5 이하로 입력해주세요.");

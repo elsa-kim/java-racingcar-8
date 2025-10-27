@@ -23,8 +23,18 @@ class CarTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", "   ", "popopo"})
-    void 팩토리메서드_of로_인스턴스_생성시_빈값이나_5글자초과하면_예외가_발생한다(String input) {
+    @ValueSource(strings = {"", "   "})
+    void 팩토리메서드_of로_인스턴스_생성시_빈값이_들어가면_예외가_발생한다(String input) {
+        assertThatThrownBy(() -> Car.of(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동차 이름은 1 이상 5 이하로 입력해주세요.");
+    }
+
+    @Test
+    void 팩토리메서드_of로_인스턴스_생성시_5글자_초과하면_예외가_발생한다() {
+        // given
+        String input = "popopo";
+
         assertThatThrownBy(() -> Car.of(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차 이름은 1 이상 5 이하로 입력해주세요.");
