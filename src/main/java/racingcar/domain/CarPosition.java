@@ -1,7 +1,7 @@
 package racingcar.domain;
 
 public class CarPosition {
-    private static final String INVALID_POSITION_MESSAGE = "잘못된 위치값입니다.";
+    private static final String INVALID_POSITION_ERROR_MESSAGE = "잘못된 위치값입니다.";
 
     private final int position;
 
@@ -24,7 +24,7 @@ public class CarPosition {
 
     private void validateNonNegative(int position) {
         if (position < 0) {
-            throw new IllegalArgumentException(INVALID_POSITION_MESSAGE);
+            throw new IllegalArgumentException(INVALID_POSITION_ERROR_MESSAGE);
         }
     }
 }
