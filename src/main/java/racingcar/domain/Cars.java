@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Cars {
-    private static final String DUPLICATE_CAR_NAME_MESSAGE = "자동차 이름은 중복일 수 없습니다.";
+    private static final String DUPLICATE_CAR_NAME_ERROR_MESSAGE = "자동차 이름은 중복일 수 없습니다.";
+    private static final String MINIMUM_CAR_COUNT_ERROR_MESSAGE = "자동차는 %d대 이상 입력해주세요.";
+
+    private static final int MINIMUM_CAR_COUNT = 2;
 
     private final List<Car> cars;
 
     private Cars(List<Car> cars) {
-        validateUniqueCarNames(cars);
+        validate(cars);
         this.cars = cars;
     }
 
@@ -43,9 +46,20 @@ public class Cars {
                 .toList();
     }
 
+    private void validate(List<Car> cars) {
+        validateCarsCount(cars);
+        validateUniqueCarNames(cars);
+    }
+
+    private void validateCarsCount(List<Car> cars) {
+        if (cars.size() < MINIMUM_CAR_COUNT) {
+            throw new IllegalArgumentException(String.format(MINIMUM_CAR_COUNT_ERROR_MESSAGE, MINIMUM_CAR_COUNT));
+        }
+    }
+
     private void validateUniqueCarNames(List<Car> cars) {
         if (isDuplicated(cars)) {
-            throw new IllegalArgumentException(DUPLICATE_CAR_NAME_MESSAGE);
+            throw new IllegalArgumentException(DUPLICATE_CAR_NAME_ERROR_MESSAGE);
         }
     }
 

@@ -44,6 +44,17 @@ class CarsTest {
     }
 
     @Test
+    void 자동자_이름을_두개_미만으로_입력시_예외가_발생한다() {
+        // given
+        String input = "pobi";
+
+        // when & then
+        assertThatThrownBy(() -> Cars.of(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동차는 2대 이상 입력해주세요.");
+    }
+
+    @Test
     void 자동차별로_전진하거나_그대로인_위치를_가진다() {
         // given
         Cars cars = Cars.of("pobi,woni,jun");
