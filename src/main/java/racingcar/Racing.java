@@ -1,6 +1,8 @@
 package racingcar;
 
 import java.util.List;
+import java.util.Map;
+import racingcar.domain.CarNames;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
 import racingcar.domain.RaceCount;
@@ -14,31 +16,53 @@ public class Racing {
     public void run() {
         Cars cars = settingCars();
         Race race = settingRace();
+        
         playRace(race, cars);
+        
         determineWinners(cars);
     }
 
-    private void determineWinners(Cars cars) {
-        List<String> winner = cars.findWinner();
-        outputView.printWinner(winner);
+    private Cars settingCars() {
+        CarNames carNames = readCarNames();
+        return Cars.from(carNames);
     }
 
-    private void playRace(Race race, Cars cars) {
-        outputView.printRoundStartMessage();
-        while (race.isRaceOngoing()) {
-            cars.move();
-            outputView.printRound(cars.getCarsStatus());
-        }
+    private CarNames readCarNames() {
+        outputView.printCarNameRequestMessage();
+        String input = inputView.readInput();
+
+        return CarNames.from(input);
     }
 
     private Race settingRace() {
         outputView.printRaceCountRequestMessage();
         RaceCount raceCount = RaceCount.of(inputView.readInput());
+        
         return Race.of(raceCount);
     }
 
-    private Cars settingCars() {
-        outputView.printCarNameRequestMessage();
-        return Cars.of(inputView.readInput());
+    private void playRace(Race race, Cars cars) {
+        outputView.printRoundStartMessage();
+        
+        while (race.isRaceOngoing()) {
+            cars.move();
+            showRoundResult(cars);
+        }
+    }
+
+    private void showRoundResult(Cars cars) {
+        List<Map<String, Integer>> carsStatus = convertToCarStatusMaps(cars);
+        outputView.printRound(carsStatus);
+    }
+
+    private List<Map<String, Integer>> convertToCarStatusMaps(Cars cars) {
+        return cars.getCars().stream()
+                .map(car -> Map.of(car.getName(), car.getPosition()))
+                .toList();
+    }
+
+    private void determineWinners(Cars cars) {
+        List<String> winner = cars.findWinner();
+        outputView.printWinner(winner);
     }
 }

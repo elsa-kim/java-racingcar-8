@@ -1,11 +1,8 @@
 package racingcar.domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class Cars {
-    private static final String DUPLICATE_CAR_NAME_ERROR_MESSAGE = "자동차 이름은 중복일 수 없습니다.";
     private static final String MINIMUM_CAR_COUNT_ERROR_MESSAGE = "자동차는 %d대 이상 입력해주세요.";
 
     private static final int MINIMUM_CAR_COUNT = 2;
@@ -13,60 +10,42 @@ public class Cars {
     private final List<Car> cars;
 
     private Cars(List<Car> cars) {
-        validate(cars);
+        validateCarsCount(cars);
         this.cars = cars;
     }
 
-    public static Cars of(String input) {
-        List<Car> cars = Arrays.stream(input.split(",", -1))
+    public static Cars from(CarNames carNames) {
+        List<Car> carList = carNames.getCarNames().stream()
                 .map(Car::of)
                 .toList();
 
-        return new Cars(cars);
+        return new Cars(carList);
     }
 
     public void move() {
         cars.forEach(Car::moveCar);
     }
 
-    public List<Map<String, Integer>> getCarsStatus() {
-        return cars.stream().map(Car::getStatus).toList();
-    }
-
     public List<String> findWinner() {
         int maxPosition = 0;
         for (Car car : cars) {
-            maxPosition = car.maxPosition(maxPosition);
+            maxPosition = Math.max(car.getPosition(), maxPosition);
         }
 
         int winnerPosition = maxPosition;
         return cars.stream()
-                .filter(car -> car.isWinner(winnerPosition))
+                .filter(car -> car.getPosition() == winnerPosition)
                 .map(Car::getName)
                 .toList();
     }
 
-    private void validate(List<Car> cars) {
-        validateCarsCount(cars);
-        validateUniqueCarNames(cars);
+    public List<Car> getCars() {
+        return List.copyOf(cars);
     }
 
     private void validateCarsCount(List<Car> cars) {
         if (cars.size() < MINIMUM_CAR_COUNT) {
             throw new IllegalArgumentException(String.format(MINIMUM_CAR_COUNT_ERROR_MESSAGE, MINIMUM_CAR_COUNT));
         }
-    }
-
-    private void validateUniqueCarNames(List<Car> cars) {
-        if (isDuplicated(cars)) {
-            throw new IllegalArgumentException(DUPLICATE_CAR_NAME_ERROR_MESSAGE);
-        }
-    }
-
-    private boolean isDuplicated(List<Car> cars) {
-        return cars.size() != cars.stream()
-                .map(Car::getName)
-                .distinct()
-                .count();
     }
 }

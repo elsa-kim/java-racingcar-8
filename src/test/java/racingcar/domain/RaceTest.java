@@ -1,6 +1,7 @@
 package racingcar.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import org.junit.jupiter.api.Test;
 
 class RaceTest {
@@ -21,12 +22,20 @@ class RaceTest {
     void 레이싱이_진행중인지_여부를_반환한다() {
         // given
         Race race = Race.of(RaceCount.of("3"));
+        race.isRaceOngoing();
+        race.isRaceOngoing();
 
         // when
-        boolean result = race.isRaceOngoing();
+        boolean result1 = race.isRaceOngoing();
+        boolean result2 = race.isRaceOngoing();
+        boolean result3 = race.isRaceOngoing();
 
         // then
-        assertThat(result).isTrue();
+        assertAll(
+                () -> assertThat(result1).isTrue(),
+                () -> assertThat(result2).isFalse(),
+                () -> assertThat(result3).isFalse()
+        );
     }
 
 }

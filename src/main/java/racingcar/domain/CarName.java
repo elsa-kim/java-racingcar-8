@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class CarName {
     private static final String INVALID_CAR_NAME_LENGTH_ERROR_MESSAGE = "자동차 이름은 1 이상 5 이하로 입력해주세요.";
+
     private static final int CAR_NAME_MAX_LENGTH = 5;
 
     private final String name;

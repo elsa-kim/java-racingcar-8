@@ -8,11 +8,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class CarNameTest {
 
-    @Test
-    void 팩토리메서드_of로_인스턴스를_생성한다() {
-        // given
-        String input = "pobi";
-
+    @ParameterizedTest
+    @ValueSource(strings = {"pobi", "pobi2"})
+    void 팩토리메서드_of로_인스턴스를_생성한다(String input) {
         // when
         CarName carName = CarName.of(input);
 

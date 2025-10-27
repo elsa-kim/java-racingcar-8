@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import java.util.Objects;
+
 public class CarPosition {
     private static final String INVALID_POSITION_ERROR_MESSAGE = "잘못된 위치값입니다.";
 
@@ -20,6 +22,20 @@ public class CarPosition {
 
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CarPosition otherPosition = (CarPosition) o;
+        return position == otherPosition.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(position);
     }
 
     private void validateNonNegative(int position) {
